@@ -1014,8 +1014,8 @@ button.acard{font:inherit;text-align:left;cursor:pointer;width:100%;border:1px s
       var el=document.getElementById('form-success');
       if(el){
         el.hidden=false;el.style.display='block';el.setAttribute('tabindex','-1');el.style.outline='none';
-        var show=function(){el.scrollIntoView({block:'center',behavior:'auto'});try{el.focus({preventScroll:true});}catch(e){}};
-        show();window.addEventListener('load',function(){setTimeout(show,150);});
+        var show=function(){var de=document.documentElement,prev=de.style.scrollBehavior;de.style.scrollBehavior='auto';el.scrollIntoView({block:'center'});de.style.scrollBehavior=prev;try{el.focus({preventScroll:true});}catch(e){}};
+        show();window.addEventListener('load',function(){show();setTimeout(show,300);});
         if(window.history&&history.replaceState){history.replaceState(null,'',window.location.pathname+'#contact-preview');}
       }
     }
