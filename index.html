@@ -827,7 +827,7 @@ button.acard{font:inherit;text-align:left;cursor:pointer;width:100%;border:1px s
 <input name="_next" type="hidden" value="https://dossofinancial.com/?sent=1#contact-preview"/>
 <input name="_url" type="hidden" value="https://dossofinancial.com/"/>
 <input name="_autoresponse" type="hidden" value="Thank you for reaching out to Madoussou Dosso. I received your message and will respond as soon as possible. If you would prefer to schedule a conversation, you can use my calendar here: https://calendly.com/mdosso-zoom--meeting-with-madoussou-dosso"/>
-<input aria-hidden="true" autocomplete="off" name="_honey" style="position:absolute;left:-9999px;opacity:0;height:1px;width:1px" tabindex="-1" type="text"/>
+<input aria-hidden="true" autocomplete="off" name="_honey" style="display:none" tabindex="-1" type="text"/>
 <div class="field"><label for="name">Name</label><input autocomplete="name" id="name" name="name" required="" type="text"/></div>
 <div class="field"><label for="email">Email</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div>
 <div class="field"><label for="phone">Phone (optional)</label><input autocomplete="tel" id="phone" name="phone" type="tel"/></div>
@@ -1012,7 +1012,12 @@ button.acard{font:inherit;text-align:left;cursor:pointer;width:100%;border:1px s
     var p=new URLSearchParams(window.location.search);
     if(p.get('sent')==='1'){
       var el=document.getElementById('form-success');
-      if(el){el.style.display='block';}
+      if(el){
+        el.hidden=false;el.style.display='block';el.setAttribute('tabindex','-1');el.style.outline='none';
+        var show=function(){var de=document.documentElement,prev=de.style.scrollBehavior;de.style.scrollBehavior='auto';el.scrollIntoView({block:'center'});de.style.scrollBehavior=prev;try{el.focus({preventScroll:true});}catch(e){}};
+        show();window.addEventListener('load',function(){show();setTimeout(show,300);});
+        if(window.history&&history.replaceState){history.replaceState(null,'',window.location.pathname+'#contact-preview');}
+      }
     }
   } catch(e) {}
 })();
