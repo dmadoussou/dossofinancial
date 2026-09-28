@@ -1022,5 +1022,19 @@ button.acard{font:inherit;text-align:left;cursor:pointer;width:100%;border:1px s
     }
   } catch(e) {}
 })();
+</script>
+<script>
+(function(){
+  try {
+    var f=document.querySelector('form[action*="formsubmit.co"]');
+    if(!f) return;
+    f.addEventListener('submit',function(){
+      var n=f.querySelector('[name="name"]'),s=f.querySelector('[name="_subject"]');
+      if(!n||!s) return;
+      var name=(n.value||'').replace(/\s+/g,' ').trim().slice(0,80);
+      if(name){s.value='New website inquiry from '+name;}
+    });
+  } catch(e) {}
+})();
 </script></body>
 </html>
